@@ -1,488 +1,1716 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* ========== RESET / BASE ========== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', system-ui;
-    color: #243e63;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #243e63;
+  --ink-strong: #111827;
+  --muted: #4b5563;
+  --purple: #6415ff;
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --shadow-soft: 0 10px 30px rgba(20, 24, 40, 0.08);
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
-    max-width: 100vw;
-    overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  background: #ffffff;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* LAYOUT GERAL */
+section {
+  padding: 0 32px;
 }
 
 .row {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .row__narrow {
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .container {
-    padding: 96px 0;
-}
-
-.purple {
-    color: #6415ff;
-}
-
-section {
-    padding: 0 32px;
+  padding: 96px 0;
 }
 
 main {
-    margin-bottom: 96px;
+  margin-bottom: 96px;
 }
 
+.purple {
+  color: var(--purple);
+}
 
-/* 
+/* UTILITÁRIOS */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #a0aec0;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
 
-NAVBAR ↓
+.grad {
+  color: var(--purple);
+}
 
-*/
-
+/* ========== NAVBAR ========== */
 
 nav {
-    display: flex;
-    padding-top: 32px;
+  display: flex;
 }
 
 .nav__row {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 26px;
 }
 
 .nav__logo {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
-    padding-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
+/* logo igual ao original */
+.logo__img {
+  width: 40px;
+  height: 40px;
+}
+
+.logo__text {
+  font-weight: 800;
+  color: #1a202c;
+  font-size: 20px;
+}
+
+/* links do nav */
+.nav__links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 44px;
+}
+
+.nav__links a {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2a44;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.nav__links a:hover {
+  border-color: var(--purple);
+}
+
+.nav__link--muted a {
+  opacity: 0.85;
+}
+
+/* botão Sign Up com tamanho correto */
+.nav__link--primary a {
+  color: #ffffff;
+  background: var(--purple);
+  padding: 12px 30px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+}
 
 .btn__menu {
-    display: none;
-    background: transparent;
-    border: none;
-    transition: all 300ms ease;
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-.btn__menu--svg:hover {
-    filter: invert(26%) sepia(94%) saturate(7476%) hue-rotate(261deg) brightness(94%) contrast(115%);
+/* ========== HERO (LANDING) – IGUAL AO ORIGINAL ========== */
+
+/* espaçamento entre navbar e hero */
+#landing header .container {
+  padding-top: 120px;
+  padding-bottom: 120px;
 }
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 378px;
-    margin: 24px 16px;
-    padding: 32px;
-    background-color: #fff;
-    border: 1px solid rgb(229, 231, 235);
-    border-radius: 8px;
-    z-index: 4;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateX(300%);
-    transition: all 300ms ease;
-}
-
-.modal__links {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.modal__link {
-    color: #1a202c;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.5;
-    margin: 8px 0;
-    padding-bottom: 4px;
-    border-bottom: 2px solid transparent;
-}
-
-.modal__link--primary {
-    color: #f7fafc;
-    padding: 12px 32px;
-    background: #6415ff;
-    border-radius: 500px;
-    border: none;
-}
-
-.menu--open .modal {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.btn__menu--close {
-    position: fixed;
-    top: 24px;
-    right: 18px;
-}
-
-
-/* 
-
-HEADER / ABOUT US ↓
-
-*/
-
 
 header .row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-body {
-    margin: 0;
-    font-family: sans-serif;
 
+/* coluna esquerda: texto + input + trusted */
+.header__left {
+  width: 52%;
+  max-width: 540px;
+  --hero-w: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-header, section {
-    padding: 40px 20px;
+
+/* coluna direita: ilustração */
+.header__right {
+  width: 48%;
+  display: flex;
+  justify-content: flex-end;
 }
-  
 
-/* 
+/* imagem grande como exemplo */
+.header__img {
+  width: 720px;
+  max-width: 100%;
+}
 
-FEATURES ↓
+/* título principal */
+.header__left h1 {
+  width: var(--hero-w);
+  font-size: 52px;
+  line-height: 1.2;
+  font-weight: 900;
+  color: #111827;
+  letter-spacing: -0.5px;
+  word-spacing: 2px;
+  margin-bottom: 16px;
+  text-align: left;
+}
 
-*/
+.header__left h1 .purple {
+  color: var(--purple);
+  font-weight: 900;
+}
 
+/* subtítulo */
+.header__sub {
+  width: var(--hero-w);
+  max-width: var(--hero-w);
+  font-size: 17px;
+  line-height: 1.75;
+  color: #4b5563;
+  margin-bottom: 26px;
+  text-align: left;
+}
+
+/* pill do e-mail */
+.header__cta {
+  width: var(--hero-w);
+  max-width: var(--hero-w);
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.cta__input {
+  width: 100%;
+  height: 64px;
+  padding: 0 210px 0 24px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 16px;
+  color: #111827;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+}
+
+.cta__input::placeholder {
+  color: #a0aec0;
+}
+
+/* botão "Get Started" */
+.cta__btn {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  height: 48px;
+  padding: 0 32px;
+  border-radius: 999px;
+  border: none;
+  background: #6415ff;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+/* OUR TRUSTED CUSTOMERS */
+.customers__title {
+  width: var(--hero-w);
+  font-size: 12px;
+  letter-spacing: 2.4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #a0aec0;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.customers__img {
+  width: 360px;
+  max-width: 100%;
+  opacity: 1;
+  filter: grayscale(100%) contrast(0.9);
+  margin-top: 4px;
+}
+
+/* afastar FEATURES pra não colar no hero */
+#features {
+  margin-top: 120px;
+}
+
+/* ========== FEATURES ========== */
 
 #features {
-    position: relative;
+  position: relative;
 }
 
-#features .row__narrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.features__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
+.section__title {
+  font-size: 36px;
+  line-height: 1.3;
+  font-weight: 800;
+}
 
-/* 
+.section__sub {
+  max-width: 640px;
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+}
 
-QUALITY WORK ↓
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 32px;
+  row-gap: 28px;
+  margin-top: 40px;
+}
 
-*/
+.service {
+  display: flex;
+  width: calc(33.333% - 21.5px);
+  align-items: flex-start;
+}
 
+.service__icon {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  background: #ffffff;
+}
+
+.service__icon img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.9;
+}
+
+.service__description h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.service__description p {
+  color: #4b5563;
+}
+
+/* ========== QUALITY ========== */
 
 #quality .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
 }
 
+.quality__left,
+.quality__right {
+  width: 50%;
+}
 
-/* 
+.buttons {
+  margin-top: 16px;
+}
 
-STEPS ↓
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: all 0.2s;
+}
 
-*/
+.btn--primary {
+  background: var(--purple);
+  color: #ffffff;
+}
 
+.btn--outline {
+  border: 2px solid var(--purple);
+  color: var(--purple);
+  background: #ffffff;
+}
+
+/* ========== STEPS ========== */
 
 #steps .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
 }
 
+.steps__left,
+.steps__right {
+  width: 50%;
+}
 
-/* 
+.steps__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
 
-VALUES ↓
+.steps__list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
 
-*/
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #edf2f7;
+  color: #1a202c;
+  font-weight: 800;
+}
+
+.steps__list h4 {
+  margin-bottom: 6px;
+}
+
+.steps__list p {
+  color: var(--muted);
+}
+
+/* ========== VALUES ========== */
 
 #values .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
 }
 
+.values__left,
+.values__right {
+  width: 50%;
+}
 
-/*
+.value__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
 
-PRICING ↓
+.value__card {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  background: #ffffff;
+}
 
-*/
+.value__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.value__icon--afford {
+  background: #e6fffa;
+  color: #0b8f88;
+}
+
+.value__icon--prof {
+  background: #ebf4ff;
+  color: #4338ca;
+}
+
+/* ========== PRICING ========== */
 
 #pricing .row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* 
+.plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 24px;
+}
 
-TESTIMONIALS ↓
+.plan {
+  width: calc(33.333% - 18.7px);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  background: #ffffff;
+}
 
-*/
+.plan__header {
+  padding: 22px;
+  background: #f9fafb;
+}
 
+.plan__header h5 {
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: #94a3b8;
+}
+
+.plan__header h3 {
+  font-size: 34px;
+  margin: 6px 0;
+  font-weight: 800;
+}
+
+.plan__features {
+  padding: 22px;
+}
+
+.plan__features p {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.plan__features ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.plan .btn {
+  margin: 16px 22px;
+  border-radius: 999px;
+}
+
+.plan--business {
+  background: linear-gradient(180deg, #5b21b6 0%, #7c3aed 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.plan--business .plan__header {
+  background: transparent;
+}
+
+.plan--business .plan__features {
+  color: #e9e4ff;
+}
+
+.plan--business .btn--primary {
+  background: #ffffff;
+  color: #5b21b6;
+}
+
+.plan--personal {
+  border-top: 6px solid #14b8a6;
+}
+
+.plan--enterprise {
+  border-top: 6px solid #fb7185;
+}
+
+.plan--personal .btn--outline {
+  border: 0;
+  background: linear-gradient(90deg, #14b8a6, #34d399);
+  color: #ffffff;
+}
+
+.plan--enterprise .btn--outline {
+  border: 0;
+  background: #fecaca;
+  color: #9f1239;
+}
+
+/* ========== TESTIMONIALS ========== */
 
 #testimonials .row {
-    display: flex;
+  display: flex;
+  gap: 32px;
 }
 
+.testimonials__left,
+.testimonials__right {
+  width: 50%;
+}
 
-/* 
+.stars {
+  color: #f59e0b;
+  font-size: 22px;
+  margin: 6px 0;
+  letter-spacing: 1px;
+}
 
-START / CALL TO ACTION ↓
+.testimonial {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  background: #ffffff;
+}
 
-*/
+.person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
 
+.person__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  object-fit: cover;
+}
 
+.testimonial .nav-arrows {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 800;
+  user-select: none;
+}
+
+/* ========== CTA (START) ========== */
 
 #start .row {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
 }
 
+#start {
+  background: linear-gradient(135deg, #5b21b6 0%, #6d28d9 50%, #5b21b6 100%);
+  color: #ffffff;
+  border-radius: 24px;
+  margin: 0 32px;
+}
 
-/* 
+#start h2 {
+  max-width: 720px;
+  font-size: 28px;
+  font-weight: 800;
+}
 
-FOOTER ↓
+#start .btn {
+  margin-top: 8px;
+}
 
-*/
+#start .btn--cta {
+  background: #fb6a67;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
 
+#start .btn--cta-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-weight: 800;
+}
+
+/* ========== FOOTER ========== */
 
 footer {
-    padding: 96px 32px;
-    background-color: rgb(100, 21, 255);
-    margin-bottom: -32px;
-    position: relative;
-    overflow: hidden;
+  padding: 96px 32px;
+  background: rgb(100, 21, 255);
+  margin-bottom: -32px;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
 }
 
-
-/* 
-
-MOBILE RESPONSIVENESS ↓
-
-*/
-
-
-@media(max-width: 1280px) {
-    header .row {
-        align-items: flex-end;
-    }
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 24px;
 }
+
+.link {
+  display: flex;
+  flex-direction: column;
+  width: calc(20% - 22.4px);
+  align-items: center;
+  text-align: center;
+}
+
+.link h5 {
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.link a {
+  color: #e9e9ff;
+  margin: 6px 0;
+}
+
+.footer__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 24px;
+}
+
+.logo__img--white {
+  filter: brightness(0) invert(1);
+}
+
+.logo__text--white {
+  color: #ffffff;
+}
+
+.built {
+  font-weight: 800;
+}
+
+.footer__socials a {
+  margin-left: 12px;
+  color: #ffffff;
+}
+
+/* ========== RESPONSIVO ========== */
 
 @media (max-width: 1024px) {
-
-    .btn__menu {
-        display: block;
-    }
-    header .row {
-        flex-direction: column;
-        align-items: center;
-    }
-    footer {
-        padding: 80px 32px;
-    }
-}
-
-@media(max-width: 768px) {
-    #quality .row,
-    #values .row {
-        flex-direction: column-reverse;
-    }
-    #steps .row,
-    #testimonials .row {
-        flex-direction: column;
-        align-items: center;
-    }
-    #pricing .row {
-        margin-top: 40px;
-    }
-}
-
-@media(max-width: 640px) {
-    .container {
-        padding: 80px 0;
-    }
-    .nav__logo {
-        margin: 8px 0;
-        padding-bottom: 4px;
-    }
-    main {
-        margin-bottom: 80px;
-    }
-}
-.feature {
-    text-align: center;
-    padding: 20px;
-    max-width: 300px;
-    margin: 0 auto 40px auto;
+  .btn__menu {
+    display: block;
   }
-  
-  .feature img {
-    width: 80px;
-    margin-bottom: 20px;
+
+  .nav__links {
+    display: none;
   }
-  .quality-content {
-    display: flex;
+
+  header .row {
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding: 32px 0;
   }
-  
-  .quality-text {
-    flex: 1;
-  }
-  
-  .quality-image {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .quality-image img {
+
+  .header__left,
+  .header__right {
     width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
   }
-  .quality-content {
-    padding: 48px 0;
+
+  .header__left {
+    --hero-w: 100%;
+    max-width: 100%;
   }
-  .steps-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap-reverse; /* deixa a imagem do lado oposto da anterior */
-    padding: 32px 0;
+
+  .header__left h1 {
+    font-size: 36px;
   }
-  
-  .steps-text {
-    flex: 1;
-  }
-  
-  .steps-image {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .steps-image img {
+
+  .header__cta,
+  .customers__title {
     width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
   }
-  .values-content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 32px;
-    text-align: center;
-    padding: 48px 0;
+
+  #start {
+    margin: 0;
   }
-  
-  .value {
-    flex: 1 1 280px;
-    max-width: 320px;
+
+  footer {
+    padding: 80px 32px;
   }
-  
-  .value img {
-    margin-bottom: 16px;
+
+  .plan {
+    width: 100%;
   }
-  .pricing-cards {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    flex-wrap: wrap;
-    padding: 48px 0;
+}
+
+@media (max-width: 768px) {
+  #quality .row,
+  #values .row {
+    flex-direction: column-reverse;
   }
-  
-  .card {
-    background-color: #fff;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 32px;
-    width: 260px;
-    text-align: center;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
-  }
-  
-  .card.highlighted {
-    border-color: #6415ff;
-    box-shadow: 0 0 20px rgba(100,21,255,0.2);
-  }
-  
-  .price {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 8px 0 16px;
-  }
-  
-  .btn-primary {
-    background-color: #6415ff;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .btn-primary:hover {
-    background-color: #4311c0;
-  }
-  .hero {
-    display: flex;
-    justify-content: space-between;
+
+  #steps .row,
+  #testimonials .row {
+    flex-direction: column;
     align-items: center;
-    gap: 40px;
+  }
+
+  #pricing .row {
+    margin-top: 40px;
+  }
+
+  .service {
+    width: 100%;
+  }
+
+  .values__left,
+  .values__right,
+  .steps__left,
+  .steps__right,
+  .testimonials__left,
+  .testimonials__right {
+    width: 100%;
+  }
+
+  .link {
+    width: 45%;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
     padding: 80px 0;
-    flex-wrap: wrap;
   }
-  
-  .hero-text {
-    flex: 1;
+
+  main {
+    margin-bottom: 80px;
   }
-  
-  .hero-text h1 {
+
+  .header__left h1 {
     font-size: 32px;
-    margin-bottom: 16px;
   }
-  
-  .hero-image {
-    flex: 1;
-    text-align: center;
+
+  .cta__input {
+    height: 52px;
+    padding-right: 160px;
   }
-  
-  .hero-image img {
+
+  .cta__btn {
+    height: 42px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .link {
     width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
   }
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-  }
-  
-  .feature, .value, .card {
-    flex: 1 1 300px;
-    max-width: 300px;
-    text-align: center;
-  }
-  
+}
+/* ========== AJUSTE NAV DUPLICADO ========== */
+/* 1) Esconde TODOS os links do menu em qualquer lugar da página */
+a[href="#features"],
+a[href="#blog"],
+a[href="#pricing"],
+a[href="#contact"],
+a[href="#login"],
+a[href="#signup"] {
+  display: none !important;
+}
+
+/* 2) Mostra de novo SÓ os links que estão dentro da .nav__links (menu certo) */
+.nav__links a[href="#features"],
+.nav__links a[href="#blog"],
+.nav__links a[href="#pricing"],
+.nav__links a[href="#contact"],
+.nav__links a[href="#login"],
+.nav__links a[href="#signup"] {
+  display: inline-block !important;
+}
+/* ========== FEATURES — AJUSTE COMPLETO PARA FICAR IGUAL AO ORIGINAL ========== */
+
+#features {
+  margin-top: 160px; /* mais espaço acima, como o original */
+  text-align: center;
+}
+
+.features__wrap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section__title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #243e63;
+  letter-spacing: 0.5px;
+}
+
+.section__title .purple {
+  color: #6415ff;
+  font-weight: 900;
+}
+
+.section__sub {
+  font-size: 18px;
+  color: #7c8ba1;
+  margin-top: 20px;
+  line-height: 1.7;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* GRID DE 6 FEATURES (3 por linha) */
+.services {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+  margin-top: 60px;
+}
+
+/* CADA FEATURE */
+.service {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  width: 100% !important;
+  padding: 0 20px;
+}
+
+/* CÍRCULO DO ÍCONE */
+.service__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 18px;
+}
+
+.service__icon img {
+  width: 26px;
+  height: 26px;
+  opacity: 0.9;
+  filter: brightness(0) saturate(100%) invert(22%) sepia(85%) saturate(5000%) hue-rotate(246deg) brightness(101%) contrast(101%);
+}
+
+/* TÍTULO DO SERVIÇO */
+.service__description h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #243e63;
+  margin-bottom: 6px;
+}
+
+/* TEXTO DO SERVIÇO */
+.service__description p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #7c8ba1;
+  max-width: 240px;
+}
+/* ========== AJUSTE FINO – FEATURES IGUAL AO ORIGINAL ========== */
+
+/* Label "FEATURES" com mesma cor/tamanho do original */
+#features .eyebrow {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a0aec0;         /* mesma cor cinza do original */
+  margin-bottom: 16px;
+}
+
+/* Título "We Have Amazing Service." maior e pesado */
+#features .section__title {
+  font-size: 48px;
+  line-height: 1.3;
+  font-weight: 900;
+  color: #243e63;
+}
+
+/* "Service." em roxo forte */
+#features .section__title .purple {
+  color: #6415ff;
+  font-weight: 900;
+}
+
+/* Parágrafo logo abaixo do título – maior */
+#features .section__sub {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #7c8ba1;
+  max-width: 600px;
+  margin: 20px auto 0 auto;
+}
+
+/* Títulos de cada feature (Secure, Fast, etc.) – aumentar */
+#features .service__description h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #243e63;
+  margin-bottom: 6px;
+}
+
+/* Textinho de cada feature – aumentar também */
+#features .service__description p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #7c8ba1;
+}
+
+/* Garantir grid 3x2 centralizado como no original */
+#features .features__wrap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#features .services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+  margin-top: 60px;
+}
+
+#features .service {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0 20px;
+}
+
+/* Círculo dos ícones igual ao modelo */
+#features .service__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+}
+/* ========== AJUSTE FINAL DO TÍTULO DAS FEATURES — IGUAL AO ORIGINAL ========== */
+
+/* Título maior e com peso extremo */
+#features .section__title {
+  font-size: 50px !important;   /* tamanho do original */
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+  color: #243e63 !important;
+  margin-bottom: 16px;
+}
+
+/* A palavra "Service." precisa ser 100% roxa */
+#features .section__title .purple {
+  color: #6415ff !important;
+  font-weight: 900 !important;
+}
+
+/* Subtítulo um pouco maior, igual ao original */
+#features .section__sub {
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  color: #7c8ba1 !important;
+  max-width: 600px;
+  margin: 20px auto 0 auto;
+}
+/* ========== AJUSTE DEFINITIVO – FEATURES IGUAL AO ORIGINAL ========== */
+
+/* 1) "FEATURES" — mesma cor e estilo do original */
+#features .eyebrow {
+  font-size: 14px !important;
+  letter-spacing: 2.6px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  color: #6415ff !important;   /* DEIXA ROXO */
+  margin-bottom: 18px !important;
+}
+
+/* 2) Título principal — mesmo tamanho do original */
+#features .section__title {
+  font-size: 54px !important;   /* TAMANHO EXATO DO ORIGINAL */
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+  color: #243e63 !important;
+}
+
+/* 3) Palavra “Service.” roxa forte */
+#features .section__title .purple {
+  color: #6415ff !important;
+  font-weight: 900 !important;
+}
+
+/* 4) Subtítulo abaixo — maior e com cor igual ao original */
+#features .section__sub {
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  color: #7c8ba1 !important;
+  max-width: 600px !important;
+  margin: 20px auto 30px auto !important;
+}
+/* ========== AJUSTE FINAL – FEATURES COMPLETAMENTE IGUAL AO ORIGINAL ========== */
+
+/* FEATURES (já está certo, mantemos) */
+#features .eyebrow {
+  font-size: 14px !important;
+  letter-spacing: 2.6px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  color: #6415ff !important;
+  margin-bottom: 18px !important;
+}
+
+/* TÍTULO MAIOR – EXATAMENTE IGUAL AO ORIGINAL */
+#features .section__title {
+  font-size: 55px !important;  /* tamanho real do original */
+  font-weight: 900 !important;
+  line-height: 1.22 !important;
+  color: #243e63 !important;
+}
+
+/* PALAVRA SERVICE ROXA */
+#features .section__title .purple {
+  color: #6415ff !important;
+  font-weight: 900 !important;
+}
+
+/* SUBTÍTULO – FONTE MAIOR COMO NO ORIGINAL */
+#features .section__sub {
+  font-size: 20px !important;   /* original é maior que 18px */
+  line-height: 1.75 !important;
+  max-width: 620px !important;
+  color: #7c8ba1 !important;
+  margin: 20px auto 40px auto !important;
+}
+
+/* TÍTULOS DAS FEATURES (Secure, Fast, etc.) */
+#features .service__description h3 {
+  font-size: 22px !important;  /* aumentar para igualar ao original */
+  font-weight: 700 !important;
+  color: #243e63 !important;
+  margin-bottom: 8px !important;
+}
+
+/* TEXTOS DAS FEATURES — AUMENTAR PARA FICAR IGUAL AO ORIGINAL */
+#features .service__description p {
+  font-size: 17px !important;   /* original tem fonte bem maior */
+  line-height: 1.75 !important;
+  color: #7c8ba1 !important;
+  max-width: 260px !important;
+}
+/* ========== AJUSTE DEFINITIVO – LARGURA IGUAL AO ORIGINAL ========== */
+
+/* Área inteira da seção FEATURES deve ter o mesmo width do Treact */
+#features {
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+}
+
+#features .features__wrap {
+  max-width: 850px !important;   /* largura EXATA do original */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+/* Linha das 6 features também limitada */
+#features .services {
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* ========== AJUSTE DE ESPAÇAMENTO ENTRE AS SEÇÕES ========== */
+
+/* Distância entre o HERO e a seção FEATURES */
+#features {
+  margin-top: 80px !important;      /* controla o espaço depois dos logos */
+}
+
+/* Padding interno da própria seção FEATURES */
+#features .container {
+  padding-top: 0 !important;        /* tira o "respiro" extra em cima */
+  padding-bottom: 96px !important;  /* mantém respiro embaixo */
+}
+
+/* Deixa o início da próxima seção (QUALITY) com respiro confortável */
+#quality .container {
+  padding-top: 96px !important;
+}
+/* ========== FEATURES – CARDS IGUAIS AO ORIGINAL (BOLINHAS + TEXTOS) ========== */
+
+/* GRID 3x2 CENTRALIZADO */
+#features .services {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: 64px !important;   /* espaço entre colunas */
+  row-gap: 40px !important;      /* espaço entre linha de cima e de baixo */
+  justify-items: center !important;
+  margin-top: 56px !important;
+}
+
+/* CADA ITEM (Secure, 24/7 Support, etc.) */
+#features .service {
+  display: flex !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  max-width: 260px !important;   /* mesma largura do original */
+  padding: 0 !important;
+}
+
+/* BOLINHA */
+#features .service__icon {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  border-radius: 9999px !important;
+  border: 1.5px solid #e5e7eb !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 16px !important;
+  background: #ffffff !important;
+}
+
+/* ÍCONE DENTRO DA BOLINHA */
+#features .service__icon img {
+  width: 22px !important;
+  height: 22px !important;
+  opacity: 0.9 !important;
+}
+
+/* BLOCO DE TEXTO AO LADO DA BOLINHA */
+#features .service__description {
+  max-width: 200px !important;
+}
+
+/* TÍTULO (Secure, Fast, etc.) */
+#features .service__description h3 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #243e63 !important;
+  margin-bottom: 6px !important;
+}
+
+/* TEXTO (lorem ipsum…) */
+#features .service__description p {
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+  color: #7c8ba1 !important;
+}
+/* ========== AJUSTE DE FONTES – SUBTÍTULO + TEXTOS DAS FEATURES ========== */
+
+/* Parágrafo logo abaixo de "We Have Amazing Service." */
+#features .section__sub {
+  font-size: 18px !important;       /* Aumenta para ficar igual ao original */
+  line-height: 1.8 !important;
+  color: #7c8ba1 !important;        /* Cinza igual ao Treact */
+  max-width: 620px !important;
+  margin: 20px auto 40px auto !important;
+}
+
+/* Textos das caixinhas (lorem ipsum embaixo de Secure, Fast, etc.) */
+#features .service__description p {
+  font-size: 15px !important;       /* Maior, para igualar o original */
+  line-height: 1.8 !important;
+  color: #7c8ba1 !important;
+  max-width: 260px !important;
+}
+/* ===== SUBTÍTULO DO FEATURES – IGUAL AO ORIGINAL ===== */
+#features .section__sub {
+  font-size: 17px !important;           /* tamanho igual ao original */
+  line-height: 1.65 !important;         /* espaçamento suave */
+  color: #7a8aa1 !important;            /* cinza idêntico ao Treact */
+  font-weight: 400 !important;          /* peso leve */
+  max-width: 560px !important;          /* mesma largura do original */
+  margin: 14px auto 46px auto !important; /* mesmo espaçamento em cima/embaixo */
+  text-align: center !important;        /* centralizado igual ao layout */
+}
+
+
+/* ========== FEATURES – CARDS IGUAIS AO ORIGINAL (TÍTULO + 3 LINHAS) ========== */
+
+/* GRID 3x2 CENTRALIZADO */
+#features .services {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  justify-items: center !important;
+  column-gap: 64px !important;
+  row-gap: 42px !important;
+  margin-top: 56px !important;
+}
+
+/* CADA CARD (Secure, 24/7 Support, etc.) */
+#features .service {
+  display: flex !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  max-width: 260px !important;
+  padding: 0 !important;
+}
+
+/* BOLINHA DO ÍCONE */
+#features .service__icon {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  border-radius: 9999px !important;
+  border: 1.5px solid #e5e7eb !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 18px !important;
+  background: #ffffff !important;
+}
+
+#features .service__icon img {
+  width: 22px !important;
+  height: 22px !important;
+  opacity: 0.9 !important;
+}
+
+/* BLOCO DE TEXTO AO LADO */
+#features .service__description {
+  max-width: 190px !important;   /* limita pra quebrar em ~3 linhas */
+}
+
+/* TÍTULO (Secure, Fast...) – MAIOR, IGUAL ORIGINAL */
+#features .service__description h3 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #243e63 !important;
+  margin-bottom: 8px !important;
+}
+
+/* TEXTO – 3 LINHAS, FONTE MAIOR */
+#features .service__description p {
+  font-size: 15px !important;        /* aumenta a fonte */
+  line-height: 1.7 !important;
+  color: #4b5563 !important;         /* cinza igual ao original */
+  max-width: 190px !important;       /* mesma largura do bloco */
+  overflow: hidden !important;       /* garante que nada “estoure” */
+}
+/* ========== AJUSTE FINAL – CARDS 100% IGUAIS AO ORIGINAL ========== */
+
+/* Títulos (Secure, 24/7 Support, Customizable...) */
+#features .service__description h3 {
+  font-size: 20px !important;   /* maior igual ao original */
+  font-weight: 700 !important;
+  color: #243e63 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Texto do card – MAIOR + MAIS LEGÍVEL + 3 LINHAS */
+#features .service__description p {
+  font-size: 16px !important;   /* aumenta a fonte */
+  line-height: 1.75 !important; /* espaçamento idêntico ao Treact */
+  color: #4a5568 !important;    /* cinza do original */
+  max-width: 220px !important;  /* quebra perfeita em 3 linhas */
+  font-weight: 400 !important;
+}
+
+/* Ícones dentro das bolinhas – igual ao original */
+#features .service__icon {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  border-radius: 50% !important;
+  border: 1px solid #e5e7eb !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#features .service__icon img {
+  width: 26px !important;   /* aumenta o ícone */
+  height: 26px !important;
+  opacity: 0.85;
+}
+/* ========== QUALITY WORK – AJUSTE COMPLETO PARA FICAR IGUAL AO ORIGINAL ========== */
+
+/* Título principal */
+#quality .quality__left h2 {
+  font-size: 42px !important;     /* maior igual ao Treact */
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #6415ff !important;
+  max-width: 420px !important;
+}
+
+/* Palavra roxa (Professionals.) */
+#quality .quality__left h2 .purple {
+  color: #6415ff !important;
+  font-weight: 900 !important;
+}
+
+/* Subtítulo (texto pequeno abaixo do título) */
+#quality .quality__left p {
+  font-size: 16.5px !important;   /* aumenta a fonte */
+  line-height: 1.75 !important;   /* espaçamento igual ao original */
+  color: #4a5568 !important;
+  max-width: 480px !important;
+  margin-top: 18px !important;
+  margin-bottom: 28px !important;
+}
+
+/* Botão */
+#quality .quality__left .btn--primary {
+  font-size: 14.5px !important;
+  padding: 14px 28px !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+/* ========== QUALITY WORK – AJUSTE FINO PARA FICAR IGUAL AO ORIGINAL ========== */
+
+/* Eyebrow "QUALITY WORK" */
+#quality .eyebrow {
+  font-size: 12px !important;
+  letter-spacing: 2.4px !important;
+  text-transform: uppercase !important;
+  color: #a0aec0 !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+}
+
+/* TÍTULO "Designed & Developed by Professionals." */
+#quality .quality__left h2 {
+  font-size: 42px !important;        /* tamanho do original */
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #6415ff !important;
+  max-width: 360px !important;       /* força as quebras em 3 linhas */
+}
+
+/* palavra em roxo "Professionals." */
+#quality .quality__left h2 .purple {
+  color: #6415ff !important;
+  font-weight: 900 !important;
+}
+
+/* PARÁGRAFO abaixo do título */
+#quality .quality__left p {
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+  color: #4a5568 !important;
+  max-width: 470px !important;
+  margin-top: 18px !important;
+  margin-bottom: 30px !important;
+}
+
+/* BOTÃO "Learn More" */
+#quality .quality__left .btn--primary {
+  font-size: 14px !important;
+  padding: 14px 30px !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+
+/* IMAGEM da direita (miniatura do site) */
+#quality .quality__right img {
+  width: 520px !important;           /* tamanho bem próximo ao original */
+  max-width: 100% !important;
+}
+
+/* GARANTIR QUE A COLUNA DA DIREITA POSSA TER DECORAÇÃO ABSOLUTA */
+#quality .quality__right {
+  position: relative !important;
+}
+
+/* DETALHE DOS PONTINHOS (quadradinho roxo) – use na sua img/div decorativa */
+#quality .quality__decor,
+#quality .quality__dots {
+  position: absolute !important;
+  right: 70px !important;            /* aproxima da borda direita da imagem */
+  bottom: -36px !important;          /* desce como no original */
+  width: 72px !important;
+  height: auto !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+/* ===========================================
+   SEÇÃO: QUALITY WORK — CLONE DO ORIGINAL
+   =========================================== */
+
+/* QUALITY WORK (eyebrow) */
+#quality .eyebrow {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2.6px !important;
+  color: #6415ff !important;  /* ROXO COMO O ORIGINAL */
+  margin-bottom: 22px !important;
+}
+
+/* TÍTULO PRINCIPAL */
+#quality .quality__left h2 {
+  font-size: 48px !important;   /* TAMANHO CORRETO DO ORIGINAL */
+  line-height: 1.2 !important;
+  font-weight: 900 !important;  /* MAIS GROSSO IGUAL AO MODELO */
+  color: #1a202c !important;
+  max-width: 460px !important;  /* QUANTIDADE DE QUEBRAS IGUAL */
+}
+
+/* PALAVRA ROXA "Professionals." */
+#quality .quality__left h2 .purple {
+  color: #6415ff !important;  
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+}
+
+/* TEXTO ABAIXO DO TÍTULO */
+#quality .quality__left p {
+  font-size: 18px !important;      /* AUMENTA FONTE */
+  line-height: 1.75 !important;
+  font-weight: 500 !important;     /* MAIS LEVE */
+}
+.eyebrow {
+  color: #6415ff !important;
+  font-size: 14px !important;
+  letter-spacing: 2.6px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  margin-bottom: 16px !important;
+}
+
+
+/* "QUALITY WORK" roxo, pequeno e espaçado */
+#quality .eyebrow {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2.5px !important;
+  color: #6415ff !important;           /* roxo igual ao original */
+  margin-bottom: 24px !important;
+}
+
+/* TÍTULO: "Designed & Developed by Professionals." */
+#quality .quality__left h2 {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 48px !important;          /* mesmo tamanho do original */
+  line-height: 1.22 !important;        /* quebra em 3 linhas certinho */
+  font-weight: 900 !important;         /* bem negrito */
+  color: #1a202c !important;           /* azul escuro do original */
+  max-width: 480px !important;
+}
+
+/* Palavra roxa "Professionals." */
+#quality .quality__left h2 .purple {
+  color: #6415ff !important;           /* roxo Treact */
+  font-weight: 900 !important;
+}
+
+/* PARÁGRAFO ABAIXO DO TÍTULO */
+#quality .quality__left p {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.75 !important;
+  font-weight: 400 !important;
+  color: #7c8ba1 !important;           /* cinza azulado igual ao print */
+  max-width: 560px !important;
+  margin-top: 20px !important;
+  margin-bottom: 32px !important;
+}
+
+/* BOTÃO "Learn More" */
+#quality .quality__left .btn--primary {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  background: #6415ff !important;
+  color: #ffffff !important;
+  padding: 16px 40px !important;
+  border-radius: 9999px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+/* ========== QUALITY WORK / SECTION TITLE (IDÊNTICO AO ORIGINAL) ========== */
+
+/* Título superior "QUALITY WORK" */
+.eyebrow {
+  color: #6415ff !important;
+  font-size: 14px !important;
+  letter-spacing: 2.6px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  margin-bottom: 16px !important;
+}
+
+/* Título principal */
+.section-title,
+#quality h2,
+#values h2,
+#steps h2,
+h2.main-title {
+  font-size: 48px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #1a202c !important;
+  margin-bottom: 24px !important;
+  max-width: 600px;
+}
+
+/* A palavra roxa do título */
+.section-title .purple,
+h2 .purple,
+h1 .purple,
+.purple-text {
+  color: #6415ff !important;
+  font-weight: 800 !important;
+}
+
+/* Parágrafo da descrição */
+.section-description,
+#quality p,
+.main-description {
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  color: #4a5568 !important;
+  max-width: 560px !important;
+  margin-top: 16px !important;
+  margin-bottom: 32px !important;
+}
+
+/* Botão "Learn More" */
+.btn-primary,
+.learn-more-btn {
+  background-color: #6415ff !important;
+  padding: 14px 32px !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-primary:hover,
+.learn-more-btn:hover {
+  background-color: #4c0dd9 !important;
+}
+/* ===== AJUSTE FINAL DAS CORES NA SEÇÃO QUALITY ===== */
+
+/* TÍTULO: "Designed & Developed by Professionals." */
+#quality .quality__left h2 {
+  font-size: 48px !important;
+  line-height: 1.22 !important;
+  font-weight: 900 !important;
+  color: #243e63 !important;   /* AZUL ESCURO só no texto normal */
+}
+
+/* SOMENTE "Professionals." ROXO */
+#quality .quality__left h2 .grad,
+#quality .quality__left h2 .purple {
+  color: #6415ff !important;   /* ROXO forte no span */
+  font-weight: 900 !important;
+}
+
+/* ===== CORREÇÃO FINAL E DEFINITIVA ===== */
+
+/* QUALITY WORK — DEIXAR ROXO SEM EXCEÇÃO */
+#quality .eyebrow {
+  color: #6415ff !important;
+  font-size: 14px !important;
+  letter-spacing: 2.6px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+/* ===== FIX FINAL DE CORES – NÃO MEXER DAQUI PRA BAIXO ===== */
+
+/* FEATURES – label roxa */
+#features .eyebrow {
+  color: #6415ff !important;
+}
+
+/* QUALITY WORK – label roxa */
+#quality .eyebrow {
+  color: #6415ff !important;
+}
+
+/* QUALITY WORK – título com 2 cores */
+/* "Designed & Developed by" = azul escuro */
+#quality .quality__left h2 {
+  color: #243e63 !important;
+}
+
+/* "Professionals." = roxo */
+#quality .quality__left h2 .grad,
+#quality .quality__left h2 .purple {
+  color: #6415ff !important;
+}
